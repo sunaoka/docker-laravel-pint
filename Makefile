@@ -1,4 +1,4 @@
-VERSION := 1.15.0
+VERSION := 1.15.1
 
 IMAGE := sunaoka/laravel-pint
 
@@ -15,7 +15,7 @@ setup:
 
 build: setup
 	docker buildx use $(BUILDER)
-	docker buildx build --platform $(PLATFORM) $(BUILDER_ARGS) --push .
+	docker buildx build --rm --no-cache --platform $(PLATFORM) $(BUILDER_ARGS) --push .
 	docker buildx rm $(BUILDER)
 
 .PHONY: all setup build
