@@ -1,4 +1,4 @@
-VERSION := 1.17.3
+VERSION := 1.18.1
 
 IMAGE := sunaoka/laravel-pint
 
