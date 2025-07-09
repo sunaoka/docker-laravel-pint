@@ -1,4 +1,4 @@
-VERSION := 1.22.0
+VERSION := 1.23.0
 
 IMAGE := sunaoka/laravel-pint
 
@@ -18,4 +18,14 @@ build: setup
 	docker buildx build --rm --no-cache --platform $(PLATFORM) $(BUILDER_ARGS) --push .
 	docker buildx rm $(BUILDER)
 
-.PHONY: all setup build
+release:
+	git checkout develop
+	git add .
+	git commit -m "Update v$(VERSION)"
+	git checkout main
+	git merge develop --no-ff -m "Merge develop into main for v$(VERSION)"
+	git tag -a v$(VERSION) -m "Release v$(VERSION)"
+	git checkout develop
+	git push origin main develop --tags
+
+.PHONY: all setup build release
